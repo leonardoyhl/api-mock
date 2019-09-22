@@ -54,10 +54,10 @@ interface Query{
      * 条件
      * where
      * @param field 字段名
-     * @param operator 比较运算符
+     * @param expression 比较表达式、运算符-operator
      * @param expected 期望值
      */
-    where(field: string, operator: string, expected: string | Array<any>): Query;
+    where(field: string, expression: string, expected: string | Array<any>): Query;
     /**
      * @deprecated
      * where and
@@ -65,14 +65,14 @@ interface Query{
      * @param operator 
      * @param expected 
      */
-    and(field: string, operator: string, expected: string | Array<any>): Query;
+    and(field: string, expression: string, expected: string | Array<any>): Query;
     /**
      * where or
      * @param field 
      * @param operator 
      * @param expected 
      */
-    or(field: string, operator: string, expected: string | Array<any>): Query;
+    or(field: string, expression: string, expected: string | Array<any>): Query;
 
     /**
      * Equal to expected value, the same to `eq`
@@ -218,6 +218,6 @@ interface StaticQuery{
     (reference: any, handler?: QueryHandler): Query;
 }
 
-// 存在编码问题，最好先设置编码
+// 编码问题，最好先设置编码
 declare var query: StaticQuery;
 export = query;
