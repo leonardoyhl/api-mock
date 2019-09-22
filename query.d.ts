@@ -19,6 +19,54 @@ interface SelectAllCallback extends ActionCallback{
 interface SelectOneCallback extends ActionCallback{
     (err: Error, one: any);
 }
+/**
+ * Synchronously Query
+ * 同步查询，当获取到结果后再返回
+ */
+interface SyncQuery{
+    /**
+     * 返回所有字段
+     */
+    select(): Array<any>;
+    /**
+     * 返回指定字段
+     * @param fields 指定返回数据中应包含的字段
+     */
+    select(fields: Array<string>): Array<any>;
+    
+    /**
+     * 返回所有字段
+     */
+    selectOne(): any;
+    /**
+     * 返回指定字段
+     * @param fields 指定返回数据中应包含的字段
+     */
+    selectOne(fields: Array<string>): any;
+
+    /**
+     * 插入单条数据
+     * Insert a single piece of data
+     * @param data 
+     */
+    insert(data: Object): any;
+    /**
+     * 插入多条数据
+     * Multiply insert a list of data
+     * @param list 
+     */
+    insertAll(list: Array<any>): any;
+
+    /**
+     * delete data
+     */
+    delete(): any;
+
+    /**
+     * update data
+     */
+    update(): any;
+}
 
 interface Query{
     /**
@@ -192,7 +240,7 @@ interface Query{
 
     /**
      * 插入单条数据
-     * Insert a single piece of data
+     * Insert a new single piece of data
      * @param data 
      * @param callback 
      */
@@ -200,18 +248,24 @@ interface Query{
     /**
      * 插入多条数据
      * Multiply insert a list of data
-     * @param data 
+     * @param list 
      * @param callback 
      */
     insertAll(list: Array<any>, callback?: (err: Error, result: any) => any): any;
 
     /**
-     * 
-     * @param data 
+     * delete data
      * @param callback 
      */
-    delete(conditons: Object, callback: (err: Error, result: any) => any): any;
+    delete(callback: (err: Error, result: any) => any): any;
 
+    /**
+     * update data
+     * @param callback 
+     */
+    update(callback: (err: Error, result: any) => any): any;
+
+    sync(): SyncQuery;
 }
 
 interface StaticQuery{
